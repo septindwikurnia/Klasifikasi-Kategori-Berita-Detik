@@ -116,5 +116,3 @@ Berikut performa singkat ketiga pendekatan:
 Proyek ini dibuat untuk keperluan pembelajaran dan penelitian akademik.
 
 ---
-
-Kalau kamu mau aku tambahkan **diagram alur**, **contoh output**, atau **badge GitHub**, tinggal bilang!
