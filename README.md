@@ -96,17 +96,3 @@ BERITA_DETIK.ipynb
 * Matplotlib
 
 ---
-
-## 📄 Lisensi
-
-Proyek ini menggunakan lisensi **MIT License**.
-
----
-
-Kalau kamu mau, aku bisa tambahkan:
-
-🔥 badge GitHub (Python version, License, Model Accuracy)
-🔥 contoh hasil prediksi model
-🔥 preview grafik hasil evaluasi
-
-Cukup bilang **“tambah badge”** atau **“tambah contoh prediksi”** ya!
