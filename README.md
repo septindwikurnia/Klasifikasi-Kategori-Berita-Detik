@@ -1,118 +1,99 @@
-# 📰 Klasifikasi Kategori Berita Detik.com
+# **Klasifikasi Berita Detik 5 Kategori**
 
-Repositori ini berisi implementasi lengkap untuk melakukan **klasifikasi kategori judul berita Detik.com** menggunakan tiga pendekatan berbeda:
+Repository ini berisi implementasi sistem klasifikasi teks untuk berita Detik ke dalam 5 kategori menggunakan pendekatan:
 
-1. **Metode Klasik** – TF-IDF + Naive Bayes
-2. **Deep Learning** – LSTM
-3. **Pretrained Model** – IndoBERT (Fine-Tuning)
+* **Metode Klasik** (TF-IDF + SVM)
+* **Deep Learning** (LSTM)
+* **Pretrained Model** (IndoBERT)
+* **Fine-Tuning Efisien** (LoRA pada IndoBERT)
 
-Semua proses mulai dari **scraping → preprocessing → training → evaluasi** ditulis dalam **1 file notebook utama**.
-
----
-
-## 📌 Isi Repository
-
-### 📄 **BERITA_DETIK.ipynb**
-
-Notebook utama yang berisi seluruh pipeline:
-
-1. **Scraping berita Detik.com**
-2. **Preprocessing teks** (cleaning, normalisasi, stopword, tokenizing)
-3. **Training model**:
-
-   * TF-IDF + Naive Bayes
-   * LSTM
-   * IndoBERT
-4. **Evaluasi dan perbandingan hasil**
-5. **Visualisasi metrik model**
-
-Notebook bisa dijalankan langsung dari awal sampai akhir.
+Seluruh proses pengolahan data, pelatihan model, dan evaluasi dilakukan melalui Google Colab.
 
 ---
 
-## 📂 Dataset
+## **1. Struktur Folder**
 
-### 📄 **berita_detik_5_kategori.csv**
+```
+data/
+  raw/                        # Dataset mentah
+    - berita_detik_5_kategori.csv
+  processed/                  # Dataset hasil preprocessing
+    - berita_clean.csv
 
-Dataset **mentah hasil scraping**, berisi:
+models/
+  classic/                    # Artefak TF-IDF + SVM
+  indobert/                   # Tokenizer + config IndoBERT
+  lora/                       # Adapter LoRA + tokenizer
+  lstm/                       # Model dan artefak LSTM
 
-* Judul berita
-* 5 kategori (label dari Detik.com)
-* URL berita (opsional)
+notebooks/
+  BERITA_DETIK_5_KATEGORI.ipynb   # Notebook utama
 
-### 📄 **berita_clean.csv**
-
-Dataset **setelah preprocessing**, meliputi:
-
-* Lowercase
-* Hapus angka & tanda baca
-* Normalisasi teks
-* Stopword removal
-* Label encoding
-
-Dataset ini digunakan untuk ketiga model.
-
----
-
-## 🏷️ Kategori Berita yang Digunakan
-
-Dataset terdiri dari **5 kategori utama**:
-
-1. **News**
-2. **Finance**
-3. **Sport**
-4. **Tech**
-5. **Entertainment**
+README.md
+```
 
 ---
 
-## 📊 Hasil Evaluasi Model
+## **2. Alur Penelitian**
 
-Berikut performa singkat ketiga pendekatan:
+1. **Data Preparation**
 
-| Pendekatan                      | Akurasi |
-| ------------------------------- | ------- |
-| **TF-IDF + Naive Bayes**        | **88%** |
-| **Deep Learning – LSTM**        | **42%** |
-| **Pretrained Model – IndoBERT** | **88%** |
+   * Pembersihan teks (lowercase, stopword removal, stemming).
+   * Penyimpanan hasil di `data/processed/`.
 
-> Catatan: Nilai akurasi dapat sedikit berbeda tergantung preprocessing dan random seed, tetapi hasil di atas mewakili performa yang diperoleh dari notebook.
+2. **Modeling**
 
----
+   * **TF-IDF + SVM** → baseline klasik.
+   * **LSTM** → pemodelan berbasis deep learning.
+   * **IndoBERT** → fine-tuning model pretrained.
+   * **LoRA** → fine-tuning parameter-efficient untuk IndoBERT.
 
-## 🛠 Tools & Library yang Digunakan
+3. **Evaluation**
 
-* Python
-* Pandas, NumPy
-* Scikit-Learn
-* TensorFlow / Keras
-* PyTorch
-* HuggingFace Transformers
-* BeautifulSoup (scraping)
-* Matplotlib / Seaborn
+   * Menggunakan accuracy, precision, recall, F1-score, dan confusion matrix.
 
 ---
 
-## 🚀 Cara Menjalankan
+## **3. Artefak Model**
+
+Model dan artefak disimpan pada folder `models/`:
+
+* Folder *classic* → TF-IDF + SVM
+* Folder *lstm* → tokenizer + label encoder + model `.h5`
+* Folder *indobert* → tokenizer & config (model besar tidak disertakan)
+* Folder *lora* → adapter LoRA dan tokenizer
+
+*Catatan:* File model besar (>100MB) tidak diunggah ke GitHub untuk memenuhi batas ukuran repository.
+
+---
+
+## **4. Notebook Utama**
+
+Seluruh tahapan mulai dari pemrosesan data hingga pelatihan dan evaluasi model terdapat pada:
+
+```
+notebooks/BERITA_DETIK_5_KATEGORI.ipynb
+```
+
+Notebook ini dapat dijalankan langsung pada Google Colab.
+
+---
+
+## **5. Menjalankan Proyek**
 
 1. Clone repository:
 
-   ```bash
-   git clone https://github.com/septindwikurnia/Klasifikasi-Kategori-Berita-Detik.git
-   ```
+```bash
+git clone https://github.com/USERNAME/NAMA-REPO.git
+```
 
-2. Buka dan jalankan:
+2. Buka notebook dalam folder `notebooks/`.
 
-   ```
-   BERITA_DETIK.ipynb
-   ```
-
-3. Eksekusi sel secara berurutan dari atas ke bawah.
+3. Sesuaikan path dataset dan model jika diperlukan.
 
 ---
 
-## 📄 Lisensi
+## **6. Catatan Tambahan**
 
-Proyek ini dibuat untuk keperluan pembelajaran dan penelitian akademik.
-
----
+* Model pretrained penuh (IndoBERT) perlu diunduh ulang melalui kode di notebook.
+* LoRA digunakan untuk memperkecil ukuran fine-tuning dan mempermudah penyimpanan artefak di GitHub.
